@@ -1,22 +1,23 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static helper.UnitValidator.validateGeoLocation;
 import static helper.UnitValidator.validateTemperature;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CurrentWeatherTest {
-    private WeatherRepository weatherRepository;
-    private WeatherRequest request;
-    private WeatherData weatherData;
+    private weatherRepository repository;
+    private weatherRequest request;
+    private weatherData weatherData;
 
     @Before
     // We set up all the tests
     public void setupTests() {
-        //request = new WeatherRequest("Tallinn", Constants.COUNTRY_CODE.EE, Constants.UNIT.metric);
+        //request = new weatherRequest("Tallinn", Constants.COUNTRY_CODE.EE, Constants.UNIT.metric);
 
-        //Example:
+        //Example data:
 //        request.city = "Tallinn";
 //        request.temperatureHighest = 35;
 //        request.temperatureLowest = 15;
@@ -24,9 +25,9 @@ public class CurrentWeatherTest {
 //        request.geoLat = 50;
 
         //Given
-        weatherRepository = new WeatherRepository();
+        repository = new weatherRepository();
         //When
-        weatherData = weatherRepository.getCurrentWeather(request);
+        weatherData = repository.getCurrentWeather(request);
     }
 
     @Test
@@ -35,7 +36,7 @@ public class CurrentWeatherTest {
         //"given" weatherRepository, "when" weatherRequest
         //"then":
         try {
-            //assertEquals();
+            validateGeoLocation(request.geoLat, request.geoLong);
         } catch (Exception e) {
             fail("Failure cause: " + e.getMessage());
         }
@@ -56,7 +57,6 @@ public class CurrentWeatherTest {
         //Test if we can get the highest temperature for the day. And check if they are correct data.
         try {
             validateTemperature(request.temperatureHighest);
-            assertEquals(weatherData.temperatureHighest, request.temperatureHighest);
         } catch (Exception e) {
             fail("Failure cause: " + e.getMessage());
         }
@@ -66,8 +66,7 @@ public class CurrentWeatherTest {
     public void getTemperatureLowest() throws Exception {
         //Test if we can get the lowest temperature for the day. And check if they are correct data.
         try {
-            assertEquals(weatherData.temperatureLowest, request.temperatureLowest);
-            throw new Exception("test");
+            validateTemperature(request.temperatureLowest);
         } catch (Exception e) {
             fail("Failure cause: " + e.getMessage());
         }
