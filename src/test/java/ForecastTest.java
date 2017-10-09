@@ -1,9 +1,10 @@
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static helper.UnitValidator.validateDate;
 import static helper.UnitValidator.validateTemperature;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,13 +14,15 @@ public class ForecastTest {
     private weatherRequest request;
     private weatherData weatherData;
     private int requestedDays = 3;
-    //private List<Double> forecastList = new ArrayList<>();
+    private List<weatherData> forecastList;
+    private String COUNTRY_CODE = "EE";
+    private String UNIT = "metric";
 
-    @Before
+    @BeforeClass
     // We set up all the tests
     public void setupTests() {
-        //request = new weatherRequest("Tallinn", Constants.COUNTRY_CODE.EE, Constants.UNIT.metric);
-
+        request = new weatherRequest("Tallinn", COUNTRY_CODE, UNIT);
+        forecastList = new ArrayList<>();
         //Given
         repository = new weatherRepository();
         //When
@@ -34,7 +37,7 @@ public class ForecastTest {
     public void requestCityMatchesResponseCity() {
         //Test if the requested city name matches the response city name.
         try {
-            assertEquals(weatherData.city, request.city);
+            assertEquals(weatherData.getCityName(), request.city);
         } catch (Exception e) {
             fail("Failure cause: " + e.getMessage());
         }
@@ -44,8 +47,8 @@ public class ForecastTest {
     public void dailyTemperaturesHighestValid() {
         try {
             //foreach day in the forecast
-            for (Object day : request.forecastList) {
-                validateTemperature(day.temperatureHighest);
+            for (weatherData day : request.forecastList) {
+                validateTemperature(weatherData.getTemperatureHighest());
             }
         } catch (Exception e) {
             fail(e.getMessage());
@@ -56,8 +59,8 @@ public class ForecastTest {
     public void dailyTemperaturesLowestValid() {
         try {
             //foreach day in the forecast
-            for (Object day : request.forecastList) {
-                validateTemperature(day.temperatureLowest);
+            for (weatherData day : request.forecastList) {
+                validateTemperature(weatherData.getTemperatureLowest());
             }
         } catch (Exception e) {
             fail(e.getMessage());
@@ -68,7 +71,7 @@ public class ForecastTest {
     public void forecastThreeDays() {
         //test if we can get three day forecast
         try {
-            assertEquals(requestedDays, request.days.length);
+            assertEquals(requestedDays, request.getDaysLength());
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -78,8 +81,8 @@ public class ForecastTest {
     public void forecastDatesValid() {
         //test if our forecast dates are valid
         try {
-            for (Object day : request.forecastList) {
-                validateDate(day);
+            for (weatherData day : request.forecastList) {
+                validateDate(day.getDate());
             }
         } catch (Exception e) {
             fail(e.getMessage());

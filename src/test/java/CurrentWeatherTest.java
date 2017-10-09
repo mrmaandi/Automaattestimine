@@ -8,13 +8,13 @@ import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CurrentWeatherTest {
-    private weatherRepository repository;
-    private weatherRequest request;
-    private weatherData weatherData;
+    private static weatherRepository repository;
+    private static weatherRequest request;
+    private static weatherData weatherData;
 
     @Before
     // We set up all the tests
-    public void setupTests() {
+    public static void setupTests() {
         //request = new weatherRequest("Tallinn", Constants.COUNTRY_CODE.EE, Constants.UNIT.metric);
 
         //Example data:
@@ -31,7 +31,7 @@ public class CurrentWeatherTest {
     }
 
     @Test
-    public void receiveGeoLocation() {
+    public static void receiveGeoLocation() {
         //Test if we can get valid Geo coordinates from a location.
         //"given" weatherRepository, "when" weatherRequest
         //"then":
@@ -43,17 +43,17 @@ public class CurrentWeatherTest {
     }
 
     @Test
-    public void requestCityMatchesResponseCity() {
+    public static void requestCityMatchesResponseCity() {
         //Test if the requested city name matches the response city name.
         try {
-            assertEquals(weatherData.city, request.city);
+            assertEquals(weatherData.getCityName(), request.city);
         } catch (Exception e) {
             fail("Failure cause: " + e.getMessage());
         }
     }
 
     @Test
-    public void getTemperatureHighest() {
+    public static void getTemperatureHighest() {
         //Test if we can get the highest temperature for the day. And check if they are correct data.
         try {
             validateTemperature(request.temperatureHighest);
@@ -63,7 +63,7 @@ public class CurrentWeatherTest {
     }
 
     @Test
-    public void getTemperatureLowest() throws Exception {
+    public static void getTemperatureLowest() throws Exception {
         //Test if we can get the lowest temperature for the day. And check if they are correct data.
         try {
             validateTemperature(request.temperatureLowest);
