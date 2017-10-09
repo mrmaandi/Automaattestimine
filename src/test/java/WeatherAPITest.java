@@ -33,6 +33,7 @@ public class WeatherAPITest {
 
     @Test
     public static void httpConnectionToForecastAPITest() {
+
         //Test for response (HTML 200OK etc, we want 200).
         String requestUrl = connection.createForecastApiURL();
         try {
