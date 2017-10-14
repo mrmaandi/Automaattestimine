@@ -39,20 +39,16 @@ public class HTTPConnection {
         System.out.println(response.toString());
     }
 
-    public String createCurrentWeatherApiURL() {
+    public String createCurrentWeatherApiURL(String city, String countryCode, String units) {
         String APILink = "http://api.openweathermap.org/data/2.5/weather?APPID=";
         String APIKey = "1fd2cd75a11b7d7eef55ceb39d47eeb0";
-        String city = "Tallinn";
-        //String countryCode = "EE";
         return APILink + APIKey + "&q=" + city + "&unit=metric";
     }
 
 
-    public String createForecastApiURL() {
+    public String createForecastApiURL(String city, String countryCode, String units) {
         String APILink = "http://api.openweathermap.org/data/2.5/forecast?APPID=";
         String APIKey = "1fd2cd75a11b7d7eef55ceb39d47eeb0";
-        String city = "Tallinn";
-        String countryCode = "EE";
         return APILink + city + ", " + countryCode + "&appid=" + APIKey + "&unit=metric";
     }
 

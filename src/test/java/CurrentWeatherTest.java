@@ -4,6 +4,7 @@ import org.junit.Test;
 import static helper.UnitValidator.validateGeoLocation;
 import static helper.UnitValidator.validateTemperature;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
