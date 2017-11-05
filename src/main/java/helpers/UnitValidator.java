@@ -21,10 +21,10 @@ public class UnitValidator {
     }
 
     //We validate the unit measures for GPS.
-    public void validateGeoLocation(double latitude, double longitude) throws Exception {
-//        if(latitude == null || longitude == null){
-//            throw new Exception("Latitude and/or longitude are null.");
-//        }
+    public void validateGeoLocation(Double latitude, Double longitude) throws Exception {
+        if (latitude == null || longitude == null) {
+            throw new Exception("Latitude and/or longitude are null.");
+        }
 
         if (minLat > latitude || latitude > maxLat) {
             throw new Exception("Latitude is not between " + minLat + " and " + maxLat + ".");

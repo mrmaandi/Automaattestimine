@@ -22,6 +22,7 @@ public class HTTPConnection implements connection.httpModel {
         // Here is connection method.
 
         URL link = new URL(url);
+
         HttpURLConnection connection = (HttpURLConnection) link.openConnection();
 
         //add request header
@@ -30,8 +31,8 @@ public class HTTPConnection implements connection.httpModel {
         int responseCode = connection.getResponseCode();
         setResponseCode(responseCode);
 
-        System.out.println("\nSending 'GET' request to URL : " + link);
-        System.out.println("Response Code : " + responseCode);
+        //System.out.println("\nSending 'GET' request to URL : " + link);
+        //System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));

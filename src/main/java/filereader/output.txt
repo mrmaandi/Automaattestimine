@@ -1,0 +1,4 @@
+Temperature in Tartu (for 2017-11-05 08:50:00) is 7.0, highest is: 7.0 and lowest is: 7.0.
+Temperature in Tartu (for 2017-11-06 12:00:00) is 7.7, highest is: 7.7 and lowest is: 7.7.
+Temperature in Tartu (for 2017-11-07 12:00:00) is 6.4, highest is: 6.4 and lowest is: 6.4.
+Temperature in Tartu (for 2017-11-08 12:00:00) is 3.92, highest is: 3.92 and lowest is: 3.92.

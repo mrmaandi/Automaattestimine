@@ -10,7 +10,7 @@ import static helpers.Constants.COUNTRY_CODE.EE;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.fail;
 
-public class requestTest {
+public class currentWeatherRequestTest {
     private Request request;
     private Repository repository;
     private UnitValidator validator;
@@ -54,6 +54,16 @@ public class requestTest {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateTemperature(data.getLowestTemp());
+        } catch (Exception e) {
+            fail("Test failed: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void temperatureValidTest(){
+        WeatherData data = repository.getCurrentWeather(request);
+        try {
+            validator.validateTemperature(data.getTemp());
         } catch (Exception e) {
             fail("Test failed: " + e.getMessage());
         }
