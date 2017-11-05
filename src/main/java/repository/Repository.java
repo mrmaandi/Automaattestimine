@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Repository {
+public class Repository implements RepositroyModel{
 
+    @Override
     public WeatherData getCurrentWeather(Request request) {
         try {
             request.fetchJsonCurrentWeatherString();
@@ -42,6 +43,7 @@ public class Repository {
         return null;
     }
 
+    @Override
     public ArrayList<WeatherData> getForecastWeather(Request request) {
         // 7, 14, 21
         List<String> jsonStrings = new ArrayList<>();

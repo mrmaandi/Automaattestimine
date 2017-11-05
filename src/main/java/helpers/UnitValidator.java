@@ -35,7 +35,7 @@ public class UnitValidator {
         }
     }
 
-    //We validate the unit measures for GPS.
+    //We validate the date.
     public void validateDate(Date date) throws Exception {
         if (date == null) {
             throw new Exception("No date specified.");

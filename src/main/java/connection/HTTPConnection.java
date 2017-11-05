@@ -13,6 +13,7 @@ public class HTTPConnection implements connection.httpModel {
     private int responseCode;
     private String jsonData;
 
+    @Override
     public String getJsonData(){
         return jsonData;
     }

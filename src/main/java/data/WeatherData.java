@@ -23,30 +23,37 @@ public class WeatherData implements DataModel{
         this.temp = temp;
     }
 
+    @Override
     public String getCity() {
         return city;
     }
 
+    @Override
     public Date getDate() {
         return date;
     }
 
+    @Override
     public double getLowestTemp() {
         return lowestTemp;
     }
 
+    @Override
     public double getHighestTemp() {
         return highestTemp;
     }
 
+    @Override
     public double getLat() {
         return lat;
     }
 
+    @Override
     public double getLon() {
         return lon;
     }
 
+    @Override
     public double getTemp() {
         return temp;
     }

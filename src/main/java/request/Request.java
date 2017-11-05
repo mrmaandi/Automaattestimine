@@ -17,6 +17,7 @@ public class Request implements RequestModel {
         this.unit = unit;
     }
 
+    @Override
     public void fetchJsonCurrentWeatherString() {
         HTTPConnection connection = new HTTPConnection();
         String url = connection.createCurrentWeatherApiURL(city, countryCode, unit);
@@ -28,6 +29,7 @@ public class Request implements RequestModel {
         this.jsonData = connection.getJsonData();
     }
 
+    @Override
     public void fetchJsonForecastWeatherString() {
         HTTPConnection connection = new HTTPConnection();
         String url = connection.createForecastApiURL(city, countryCode, unit);
@@ -39,18 +41,22 @@ public class Request implements RequestModel {
         this.jsonData = connection.getJsonData();
     }
 
+    @Override
     public String getCity(){
         return city;
     }
 
+    @Override
     public Constants.COUNTRY_CODE getCountryCode(){
         return countryCode;
     }
 
+    @Override
     public Constants.UNIT getUnit(){
         return unit;
     }
 
+    @Override
     public String getJsonData() {
         return jsonData;
     }
