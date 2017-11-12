@@ -39,7 +39,7 @@ public class forecastRequestTest {
     }
 
     @Test
-    public void coordinatesMatchRequestTest() {
+    public void coordinatesValidTest() {
         ArrayList<WeatherData> data = repository.getForecastWeather(request);
         for (WeatherData forecast : data) {
             try {
@@ -49,4 +49,30 @@ public class forecastRequestTest {
             }
         }
     }
+
+    @Test
+    public void dailyLowsValidationTest(){
+        ArrayList<WeatherData> data = repository.getForecastWeather(request);
+        for (WeatherData forecast : data) {
+            try {
+                validator.validateTemperature(forecast.getLowestTemp());
+            } catch (Exception e) {
+                fail("Test failed: " + e.getMessage());
+            }
+        }
+    }
+
+    @Test
+    public void dailyHighsValidationTest(){
+        ArrayList<WeatherData> data = repository.getForecastWeather(request);
+        for (WeatherData forecast : data) {
+            try {
+                validator.validateTemperature(forecast.getHighestTemp());
+            } catch (Exception e) {
+                fail("Test failed: " + e.getMessage());
+            }
+        }
+    }
+
+
 }

@@ -73,7 +73,7 @@ public class currentWeatherRequestTest {
     public void dateValidTest(){
         WeatherData data = repository.getCurrentWeather(request);
         try {
-            validator.validateDate(data.getDate());
+            validator.validateCurrentDate(data.getDate());
         } catch (Exception e) {
             fail("Test failed: " + e.getMessage());
         }

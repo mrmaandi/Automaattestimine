@@ -1,5 +1,6 @@
 package helpers;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class UnitValidator {
@@ -36,9 +37,15 @@ public class UnitValidator {
     }
 
     //We validate the date.
-    public void validateDate(Date date) throws Exception {
+    public void validateCurrentDate(Date date) throws Exception {
+        LocalDateTime timeNow = LocalDateTime.now();
+
         if (date == null) {
             throw new Exception("No date specified.");
+        }
+
+        if (timeNow.getYear() != 0) {
+
         }
     }
 

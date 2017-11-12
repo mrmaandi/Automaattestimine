@@ -1,4 +1,4 @@
-package filereader;
+package fileactions;
 
 import data.WeatherData;
 import helpers.Constants;
@@ -8,26 +8,29 @@ import request.Request;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ReadFile {
+public class WriteFile {
+    private String path;
 
-    public void writeToFile() throws FileNotFoundException {
+    public WriteFile(){
+        path = "C:\\Users\\Vill-\\IdeaProjects\\Automaattestimine\\src\\main\\java\\filereader\\";
+    }
+
+    public void writeToFile(ArrayList<String> cityList) throws FileNotFoundException {
         String path = "C:\\Users\\Vill-\\IdeaProjects\\Automaattestimine\\src\\main\\java\\filereader\\";
         String input = path + "input.txt";
         BufferedWriter writer = null;
-        BufferedReader reader = null;
+        FileWriter outputWriter = null;
 
-        FileReader fileReader = new FileReader(input);
         // This will reference one line at a time
-        String city;
         try {
-            reader = new BufferedReader(fileReader);
-            while ((city = reader.readLine()) != null) {
+            for (String city : cityList) {
                 // Current weather
                 Request request = new Request(city, Constants.COUNTRY_CODE.EE, Constants.UNIT.metric);
                 Repository repository = new Repository();
                 WeatherData currentWeather = repository.getCurrentWeather(request);
 
-                FileWriter outputWriter = new FileWriter(path + "output.txt");
+                String outputpath = "C:\\Users\\Vill-\\IdeaProjects\\Automaattestimine\\src\\main\\java\\filereader\\city_results\\";
+                outputWriter = new FileWriter(outputpath + currentWeather.getCity()+".txt");
                 writer = new BufferedWriter(outputWriter);
                 writer.write(currentWeather.toString() + "\n");
 
@@ -35,6 +38,7 @@ public class ReadFile {
                 for (WeatherData data : forecastList) {
                     writer.write(data.toString() + "\n");
                 }
+                writer.close();
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to open file '" + input + "'");
@@ -42,11 +46,9 @@ public class ReadFile {
             System.out.println("Error reading file '" + input + "'");
         } finally {
             try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (writer != null)
+                if (writer != null) {
                     writer.close();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
