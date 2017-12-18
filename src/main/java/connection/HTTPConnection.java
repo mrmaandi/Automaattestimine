@@ -32,9 +32,6 @@ public class HTTPConnection implements connection.httpModel {
         int responseCode = connection.getResponseCode();
         setResponseCode(responseCode);
 
-        //System.out.println("\nSending 'GET' request to URL : " + link);
-        //System.out.println("Response Code : " + responseCode);
-
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
         String inputLine;
@@ -67,7 +64,7 @@ public class HTTPConnection implements connection.httpModel {
         return responseCode;
     }
 
-    public void setResponseCode(int responseCode) {
+    private void setResponseCode(int responseCode) {
         this.responseCode = responseCode;
     }
 }

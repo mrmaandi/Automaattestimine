@@ -1,4 +1,3 @@
-tallinn
-voru
 tartu
-narva
+voru
+tallinn

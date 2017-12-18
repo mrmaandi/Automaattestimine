@@ -1,17 +1,18 @@
 package request;
 
 import connection.HTTPConnection;
-import helpers.Constants;
+import helpers.Constants.COUNTRY_CODE;
+import helpers.Constants.UNIT;
 
 import java.io.IOException;
 
 public class Request implements RequestModel {
     private String jsonData;
     private String city;
-    private Constants.COUNTRY_CODE countryCode;
-    private Constants.UNIT unit;
+    private COUNTRY_CODE countryCode;
+    private UNIT unit;
 
-    public Request(String city, Constants.COUNTRY_CODE countryCode, Constants.UNIT unit) {
+    public Request(String city, COUNTRY_CODE countryCode, UNIT unit) {
         this.city = city;
         this.countryCode = countryCode;
         this.unit = unit;
@@ -47,12 +48,12 @@ public class Request implements RequestModel {
     }
 
     @Override
-    public Constants.COUNTRY_CODE getCountryCode(){
+    public COUNTRY_CODE getCountryCode(){
         return countryCode;
     }
 
     @Override
-    public Constants.UNIT getUnit(){
+    public UNIT getUnit(){
         return unit;
     }
 

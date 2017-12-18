@@ -1,3 +1,5 @@
+package helpers;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +24,6 @@ public class validatorTest {
     @Test
     public void currentRequestTimeValidTest(){
         LocalDate d = LocalDate.of(1,2,3);
-        Date dd = Date.valueOf(d);
+        Date date = Date.valueOf(d);
     }
 }
