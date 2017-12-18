@@ -1,0 +1,6 @@
+City: tartu
+Coordinates: 58.37, 26.72
+Weather for date (2017-12-19 18:00:00): Minimum: -1.1, Maximum: -1.1
+Weather for date (2017-12-20 18:00:00): Minimum: -2.21, Maximum: -2.21
+Weather for date (2017-12-21 18:00:00): Minimum: 0.22, Maximum: 0.22
+Temperature today in Tartu (for 2017-12-18 16:50:00) is -1.0, highest is: -1.0 and lowest is: -1.0.

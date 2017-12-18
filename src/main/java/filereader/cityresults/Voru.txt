@@ -1,0 +1,6 @@
+City: voru
+Coordinates: 57.83, 27.02
+Weather for date (2017-12-19 18:00:00): Minimum: -1.6, Maximum: -1.6
+Weather for date (2017-12-20 18:00:00): Minimum: -3.49, Maximum: -3.49
+Weather for date (2017-12-21 18:00:00): Minimum: -0.96, Maximum: -0.96
+Temperature today in Voru (for 2017-12-18 16:50:00) is -1.0, highest is: -1.0 and lowest is: -1.0.

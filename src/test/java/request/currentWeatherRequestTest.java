@@ -1,10 +1,11 @@
+package request;
+
 import data.WeatherData;
 import helpers.Constants;
 import helpers.UnitValidator;
 import org.junit.Before;
 import org.junit.Test;
 import repository.Repository;
-import request.Request;
 
 import static helpers.Constants.COUNTRY_CODE.EE;
 import static junit.framework.TestCase.assertEquals;
