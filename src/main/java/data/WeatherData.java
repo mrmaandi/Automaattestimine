@@ -66,7 +66,7 @@ public class WeatherData implements DataModel{
 
     @Override
     public String toString(){
-        return "Temperature in " + city + " (for " + getFormattedDate() + ") is " + temp + ", highest is: " + highestTemp +
+        return "Temperature today in " + city + " (for " + getFormattedDate() + ") is " + temp + ", highest is: " + highestTemp +
                 " and lowest is: " + lowestTemp + ".";
     }
 }

@@ -1,4 +1,5 @@
-import connection.HTTPConnection;
+package connection;
+
 import org.junit.Before;
 import org.junit.Test;
 

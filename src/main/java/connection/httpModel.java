@@ -1,12 +1,13 @@
 package connection;
 
-import helpers.Constants;
+import helpers.Constants.COUNTRY_CODE;
+import helpers.Constants.UNIT;
 
 import java.io.IOException;
 
 public interface httpModel {
-    public void makeHttpUrlConnection(String url) throws IOException;
-    public String createCurrentWeatherApiURL(String city, Constants.COUNTRY_CODE countryCode, Constants.UNIT unit);
-    public String createForecastApiURL(String city, Constants.COUNTRY_CODE countryCode, Constants.UNIT unit);
-    public String getJsonData();
+    void makeHttpUrlConnection(String url) throws IOException;
+    String createCurrentWeatherApiURL(String city, COUNTRY_CODE countryCode, UNIT unit);
+    String createForecastApiURL(String city, COUNTRY_CODE countryCode, UNIT unit);
+    String getJsonData();
 }
