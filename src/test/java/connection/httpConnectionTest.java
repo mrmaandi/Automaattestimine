@@ -25,8 +25,7 @@ public class httpConnectionTest {
     public void httpConnectionToForecastAPITest() {
         connection = new HTTPConnection();
         //Test for response (HTML 200OK etc, we want 200).
-        String requestUrl = connection.createForecastApiURL
-                ("Tallinn", EE, metric);
+        String requestUrl = connection.createForecastApiURL("Tallinn", EE, metric);
         try {
             connection.makeHttpUrlConnection(requestUrl);
             int responseCode = connection.getResponseCode();
@@ -40,8 +39,7 @@ public class httpConnectionTest {
     public void httpConnectionToCurrentWeatherAPITest() {
         connection = new HTTPConnection();
         //Test for response (HTML 200OK etc, we want 200).
-        String requestUrl = connection.createCurrentWeatherApiURL
-                ("Tallinn", EE, metric);
+        String requestUrl = connection.createCurrentWeatherApiURL("Tallinn", EE, metric);
         try {
             connection.makeHttpUrlConnection(requestUrl);
             int responseCode = connection.getResponseCode();
@@ -55,14 +53,18 @@ public class httpConnectionTest {
     public void httpConnectionMockTest(){
         connection = mock(HTTPConnection.class);
         try {
-            connection.makeHttpUrlConnection(connection.createCurrentWeatherApiURL
-                    ("Tallinn", EE, metric));
-
-            verify(connection).makeHttpUrlConnection(connection.createCurrentWeatherApiURL
-                    ("Tallinn", EE, metric));
+            connection.makeHttpUrlConnection(connection.createCurrentWeatherApiURL("Tallinn", EE, metric));
+            verify(connection).makeHttpUrlConnection(connection.createCurrentWeatherApiURL("Tallinn", EE, metric));
         } catch (IOException e) {
             fail("Couldn't connect.");
         }
+    }
+
+    @Test
+    public void makeHttpUrlConnectionShouldThrowFileNotFoundException() throws IOException {
+        connection = mock(HTTPConnection.class);
+
+        connection.makeHttpUrlConnection(null);
     }
 
 }

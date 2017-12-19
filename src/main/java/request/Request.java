@@ -19,25 +19,23 @@ public class Request implements RequestModel {
     }
 
     @Override
-    public void fetchJsonCurrentWeatherString() {
-        HTTPConnection connection = new HTTPConnection();
+    public void fetchJsonCurrentWeatherString(HTTPConnection connection) {
         String url = connection.createCurrentWeatherApiURL(city, countryCode, unit);
         try {
             connection.makeHttpUrlConnection(url);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         this.jsonData = connection.getJsonData();
     }
 
     @Override
-    public void fetchJsonForecastWeatherString() {
-        HTTPConnection connection = new HTTPConnection();
+    public void fetchJsonForecastWeatherString(HTTPConnection connection) {
         String url = connection.createForecastApiURL(city, countryCode, unit);
         try {
             connection.makeHttpUrlConnection(url);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         this.jsonData = connection.getJsonData();
     }

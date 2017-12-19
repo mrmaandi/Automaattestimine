@@ -34,7 +34,12 @@ public class Controller {
         OutputFileWriter outputFileWriter = new OutputFileWriter(inputDataList);
         outputFileWriter.writeToFile(outputDestination);
 
-        askUserInput();
+        try {
+            askUserInput();
+        } catch (NullPointerException e) {
+            System.out.println("The program will stop.");
+        }
+
     }
 
     void askUserInput() throws IOException {
@@ -43,20 +48,31 @@ public class Controller {
         System.out.println("Enter city:");
         String userInput = bufferedReader.readLine();
 
-        displayWeatherResults(userInput);
+        try {
+            displayWeatherResults(userInput);
+        } catch (Exception e) {
+            System.out.println("Some values are incorrect.");
+        }
     }
 
-    void displayWeatherResults(String userInput) {
-        // Print current weather
-        Request request = new Request(userInput, EE, metric);
-        Repository repository = new Repository();
-        WeatherData currentWeather = repository.getCurrentWeather(request);
-        System.out.println(currentWeather.toString());
+    void displayWeatherResults(String userInput) throws Exception {
+        if(userInput != null){
+            // Print current weather
+            Request request = new Request(userInput, EE, metric);
+            Repository repository = new Repository();
+            WeatherData currentWeather = repository.getCurrentWeather(request);
 
-        // Print forecast weather
-        ArrayList<WeatherData> forecastList = repository.getForecastWeather(request);
-        for (WeatherData data : forecastList) {
-            System.out.println(data.toString());
+            System.out.println("Here are your results for the next 3 days:");
+            System.out.println("City: " + currentWeather.getCity() + "\n" + "Coordinates: "
+                    + currentWeather.getLat() + ", " + currentWeather.getLon());
+
+            // Print forecast weather
+            ArrayList<WeatherData> forecastList = repository.getForecastWeather(request);
+            for (WeatherData data : forecastList) {
+                System.out.println(data.toString());
+            }
+
+            System.out.println(currentWeather.getCurrentWeatherToString());
         }
     }
 }

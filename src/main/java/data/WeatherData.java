@@ -1,19 +1,20 @@
 package data;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.TimeZone;
 
-public class WeatherData implements DataModel{
+import static java.lang.Long.parseLong;
+
+public class WeatherData implements DataModel {
     private double lat;
     private double lon;
     private String city;
-    private Date date;
+    private String date;
     private double temp;
     private double lowestTemp;
     private double highestTemp;
 
-    public WeatherData(String city, Date date, double lowestTemp, double highestTemp, double lon, double lat, double temp){
+    public WeatherData(String city, String date, double lowestTemp, double highestTemp, double lon, double lat, double temp) {
         this.city = city;
         this.date = date;
         this.lowestTemp = lowestTemp;
@@ -29,7 +30,7 @@ public class WeatherData implements DataModel{
     }
 
     @Override
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -58,15 +59,19 @@ public class WeatherData implements DataModel{
         return temp;
     }
 
-    public String getFormattedDate(){
+    public String getFormattedDate(String date) {
+        long epoch = parseLong(date) * 1000;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return sdf.format(date);
+        sdf.setTimeZone(TimeZone.getTimeZone("Europe/Tallinn"));
+        return sdf.format(epoch);
     }
 
     @Override
-    public String toString(){
-        return "Temperature today in " + city + " (for " + getFormattedDate() + ") is " + temp + ", highest is: " + highestTemp +
-                " and lowest is: " + lowestTemp + ".";
+    public String toString() {
+        return "Weather for date (" + date + "): Minimum: " + lowestTemp + ", Maximum: " + highestTemp + ".";
+    }
+
+    public String getCurrentWeatherToString() {
+        return "Temperature right now today (" + getFormattedDate(date) + ") is: " + temp;
     }
 }

@@ -15,12 +15,13 @@ public class InputFileReader {
     public void readFromFile(File inputFile){
         BufferedReader bufferedReader;
         try {
+            System.out.println("-- Started reading file --");
             String readLine;
             bufferedReader = createBufferedReader(inputFile);
             while ((readLine = bufferedReader.readLine()) != null) {
-                System.out.println("Reading line...");
                 inputDataList.addToCities(readLine);
             }
+            System.out.println("-- Finished creating files --");
         } catch (IOException e) {
             e.printStackTrace();
         }

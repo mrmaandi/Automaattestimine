@@ -1,8 +1,5 @@
 package helpers;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
 public class UnitValidator {
     private double minTemp = -70;
     private double maxTemp = 70;
@@ -26,26 +23,18 @@ public class UnitValidator {
         if (latitude == null || longitude == null) {
             throw new Exception("Latitude and/or longitude are null.");
         }
-
         if (minLat > latitude || latitude > maxLat) {
             throw new Exception("Latitude is not between " + minLat + " and " + maxLat + ".");
         }
-
         if (minLong > longitude || longitude > maxLong) {
             throw new Exception("Longitude is not between " + minLong + " and " + maxLong + ".");
         }
     }
 
     //We validate the date.
-    public void validateCurrentDate(Date date) throws Exception {
-        LocalDateTime timeNow = LocalDateTime.now();
-
+    public void validateCurrentDate(String date) throws Exception {
         if (date == null) {
             throw new Exception("No date specified.");
-        }
-
-        if (timeNow.getYear() != 0) {
-
         }
     }
 

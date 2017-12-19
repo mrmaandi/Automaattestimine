@@ -9,7 +9,7 @@ import static helpers.Constants.UNIT.metric;
 public class RepositoryTest {
 
     @Ignore
-    public void repositoryGetCurrentWeatherShouldThrowJSONExceptionWhenRequestNull(){
+    public void repositoryGetCurrentWeatherShouldThrowJSONExceptionWhenRequestNull() throws Exception {
         Repository repository = new Repository();
         Request request = new Request("Tallinn", EE, metric);
         repository.getCurrentWeather(request);

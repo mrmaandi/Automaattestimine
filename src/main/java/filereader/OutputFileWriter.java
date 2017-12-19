@@ -24,38 +24,48 @@ public class OutputFileWriter {
     }
 
     public void writeToFile(String outputDestination) {
-        BufferedWriter bufferedWriter;
+        for (String city : inputDataList.getCities()) {
+            // Current weather
+            Request request = new Request(city, EE, metric);
+            Repository repository = new Repository();
 
-        try {
-            for (String city : inputDataList.getCities()) {
-                // Current weather
-                Request request = new Request(city, EE, metric);
-                Repository repository = new Repository();
-                WeatherData currentWeather = repository.getCurrentWeather(request);
-
-                String outputPath = absolutePath + outputDestination
-                        + currentWeather.getCity() + ".txt";
-                File outputFile = new File(outputPath);
-                FileWriter fileWriter = new FileWriter(outputFile);
-                bufferedWriter = new BufferedWriter(fileWriter);
-
-                bufferedWriter.write("City: " + city + "\n" + "Coordinates: "
-                        + currentWeather.getLat() + ", " + currentWeather.getLon() + "\n");
-
-                ArrayList<WeatherData> forecastList = repository.getForecastWeather(request);
-                for (WeatherData data : forecastList) {
-                    // linna nimi, koordinaadid, iga ennustatud päeva kohta min, max temp, hetke ilma temp.
-                    String output = "Weather for date (" + data.getFormattedDate() + "): Minimum: " + data.getLowestTemp() + ", Maximum: " + data.getHighestTemp();
-                    bufferedWriter.write(output + "\n");
-                }
-
-                bufferedWriter.write(currentWeather.toString() + "\n");
-
-                bufferedWriter.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            writeFilesBufferedWriter(outputDestination, request, repository);
         }
+    }
 
+    void writeFilesBufferedWriter(String outputDestination, Request request, Repository repository) {
+        WeatherData currentWeather;
+        BufferedWriter bufferedWriter;
+        try {
+            currentWeather = repository.getCurrentWeather(request);
+
+            String outputPath = absolutePath + outputDestination
+                    + currentWeather.getCity() + ".txt";
+            File outputFile = new File(outputPath);
+            FileWriter fileWriter = new FileWriter(outputFile);
+
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write("City: " + currentWeather.getCity() + "\n" + "Coordinates: "
+                    + currentWeather.getLat() + ", " + currentWeather.getLon() + "\n");
+
+            //Forecasts
+            writeForecasts(request, repository, bufferedWriter);
+
+            //Current weather
+            bufferedWriter.write(currentWeather.getCurrentWeatherToString() + "\n");
+
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println("Could not get weather.");
+        }
+    }
+
+    void writeForecasts(Request request, Repository repository, BufferedWriter bufferedWriter) throws IOException {
+        ArrayList<WeatherData> forecastList = repository.getForecastWeather(request);
+        for (WeatherData data : forecastList) {
+            String output = "Weather for date (" + data.getDate() + "): Minimum: " + data.getLowestTemp() + ", Maximum: " + data.getHighestTemp();
+            bufferedWriter.write(output + "\n");
+        }
     }
 }

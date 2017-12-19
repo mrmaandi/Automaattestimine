@@ -1,12 +1,15 @@
 package request;
 
-import helpers.Constants;
+import connection.HTTPConnection;
+import helpers.Constants.COUNTRY_CODE;
+
+import static helpers.Constants.UNIT;
 
 public interface RequestModel {
-    public void fetchJsonCurrentWeatherString();
-    public void fetchJsonForecastWeatherString();
-    public String getCity();
-    public Constants.COUNTRY_CODE getCountryCode();
-    public Constants.UNIT getUnit();
-    public String getJsonData();
+     void fetchJsonCurrentWeatherString(HTTPConnection connection);
+     void fetchJsonForecastWeatherString(HTTPConnection connection);
+     String getCity();
+     COUNTRY_CODE getCountryCode();
+     UNIT getUnit();
+     String getJsonData();
 }

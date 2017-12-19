@@ -24,14 +24,14 @@ public class currentWeatherRequestTest {
     }
 
     @Test
-    public void requestCityMatchesResponseTest(){
+    public void requestCityMatchesResponseTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         System.out.println(data.getCity() + data.getDate() + data.getHighestTemp() + data.getLowestTemp());
         assertEquals(data.getCity(), request.getCity());
     }
 
     @Test
-    public void coordinatesMatchRequestTest(){
+    public void coordinatesMatchRequestTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateGeoLocation(data.getLat(), data.getLon());
@@ -41,7 +41,7 @@ public class currentWeatherRequestTest {
     }
 
     @Test
-    public void temperatureHighestValidTest(){
+    public void temperatureHighestValidTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateTemperature(data.getHighestTemp());
@@ -51,7 +51,7 @@ public class currentWeatherRequestTest {
     }
 
     @Test
-    public void temperatureLowestValidTest(){
+    public void temperatureLowestValidTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateTemperature(data.getLowestTemp());
@@ -61,7 +61,7 @@ public class currentWeatherRequestTest {
     }
 
     @Test
-    public void temperatureValidTest(){
+    public void temperatureValidTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateTemperature(data.getTemp());
@@ -71,7 +71,7 @@ public class currentWeatherRequestTest {
     }
 
     @Test
-    public void dateValidTest(){
+    public void dateValidTest() throws Exception {
         WeatherData data = repository.getCurrentWeather(request);
         try {
             validator.validateCurrentDate(data.getDate());

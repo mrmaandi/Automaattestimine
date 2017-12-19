@@ -1,8 +1,10 @@
 package connection;
 
-import helpers.Constants;
+import helpers.Constants.COUNTRY_CODE;
+import helpers.Constants.UNIT;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,47 +16,52 @@ public class HTTPConnection implements connection.httpModel {
     private String jsonData;
 
     @Override
-    public String getJsonData(){
+    public String getJsonData() {
         return jsonData;
     }
 
     @Override
     public void makeHttpUrlConnection(String url) throws IOException {
-        // Here is connection method.
+        if(url != null){
+            // Here is connection method.
 
-        URL link = new URL(url);
+            URL link = new URL(url);
 
-        HttpURLConnection connection = (HttpURLConnection) link.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) link.openConnection();
 
-        //add request header
-        connection.setRequestProperty("User-Agent", USER_AGENT);
+            // add request header
+            connection.setRequestProperty("User-Agent", USER_AGENT);
 
-        int responseCode = connection.getResponseCode();
-        setResponseCode(responseCode);
+            responseCode = connection.getResponseCode();
 
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
+            if (responseCode == 404) {
+                throw new FileNotFoundException("Could not find a file for that input. Please enter correct city.");
+            }
 
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            jsonData = response.toString();
         }
-        in.close();
-
-        jsonData = response.toString();
     }
 
 
     @Override
-    public String createCurrentWeatherApiURL(String city, Constants.COUNTRY_CODE countryCode, Constants.UNIT unit) {
+    public String createCurrentWeatherApiURL(String city, COUNTRY_CODE countryCode, UNIT unit) {
         String APILink = "http://api.openweathermap.org/data/2.5/weather?APPID=";
         String APIKey = "1fd2cd75a11b7d7eef55ceb39d47eeb0";
         return APILink + APIKey + "&q=" + city + "," + countryCode + "&units=" + unit;
     }
 
     @Override
-    public String createForecastApiURL(String city, Constants.COUNTRY_CODE countryCode, Constants.UNIT unit) {
+    public String createForecastApiURL(String city, COUNTRY_CODE countryCode, UNIT unit) {
         String APILink = "http://api.openweathermap.org/data/2.5/forecast?APPID=";
         String APIKey = "1fd2cd75a11b7d7eef55ceb39d47eeb0";
         return APILink + APIKey + "&q=" + city + "," + countryCode + "&units=" + unit;
@@ -62,9 +69,5 @@ public class HTTPConnection implements connection.httpModel {
 
     public int getResponseCode() {
         return responseCode;
-    }
-
-    private void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
     }
 }
