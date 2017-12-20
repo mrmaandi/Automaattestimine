@@ -2,8 +2,8 @@ package controller;
 
 import data.InputDataList;
 import data.WeatherData;
-import filereader.InputFileReader;
-import filereader.OutputFileWriter;
+import operations.InputFileReader;
+import operations.OutputFileWriter;
 import repository.Repository;
 import request.Request;
 
@@ -20,18 +20,18 @@ import static helpers.Constants.UNIT.metric;
 public class Controller {
 
     private String absolutePath = Paths.get("").toAbsolutePath().toString();
-    private File inputFile = new File(absolutePath + "\\src\\main\\java\\filereader\\input.txt");
-    private String outputDestination = "\\src\\main\\java\\filereader\\cityresults\\";
+    private File inputFile = new File(absolutePath + "\\src\\main\\java\\operations\\input.txt");
+    private String outputDestination = "\\src\\main\\java\\operations\\cityresults\\";
 
     public void initialize() throws IOException {
         // Read from file.
         InputDataList inputDataList = new InputDataList();
 
-        InputFileReader inputFileReader = new InputFileReader(inputDataList);
+        InputFileReader inputFileReader = createInputFileReader(inputDataList);
         inputFileReader.readFromFile(inputFile);
 
         // Write to file
-        OutputFileWriter outputFileWriter = new OutputFileWriter(inputDataList);
+        OutputFileWriter outputFileWriter = createOutputFileWriter(inputDataList);
         outputFileWriter.writeToFile(outputDestination);
 
         try {
@@ -40,6 +40,14 @@ public class Controller {
             System.out.println("The program will stop.");
         }
 
+    }
+
+     OutputFileWriter createOutputFileWriter(InputDataList inputDataList) {
+        return new OutputFileWriter(inputDataList);
+    }
+
+     InputFileReader createInputFileReader(InputDataList inputDataList) {
+        return new InputFileReader(inputDataList);
     }
 
     void askUserInput() throws IOException {

@@ -1,4 +1,4 @@
-package filereader;
+package operations;
 
 import data.InputDataList;
 
@@ -38,4 +38,11 @@ public class InputFileReader {
         return new FileReader(inputFile);
     }
 
+    public void setInputDataList(InputDataList inputDataList) {
+        this.inputDataList = inputDataList;
+    }
+
+    public InputDataList getInputDataList() {
+        return inputDataList;
+    }
 }

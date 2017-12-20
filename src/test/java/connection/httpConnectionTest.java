@@ -1,6 +1,5 @@
 package connection;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -15,11 +14,6 @@ import static org.mockito.Mockito.verify;
 public class httpConnectionTest {
     private final int HTTP_STATUS_OK_CODE = 200;
     private HTTPConnection connection;
-
-    @Before
-    public void setupTests(){
-
-    }
 
     @Test
     public void httpConnectionToForecastAPITest() {
@@ -58,13 +52,6 @@ public class httpConnectionTest {
         } catch (IOException e) {
             fail("Couldn't connect.");
         }
-    }
-
-    @Test
-    public void makeHttpUrlConnectionShouldThrowFileNotFoundException() throws IOException {
-        connection = mock(HTTPConnection.class);
-
-        connection.makeHttpUrlConnection(null);
     }
 
 }

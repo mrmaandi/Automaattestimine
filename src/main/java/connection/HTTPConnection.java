@@ -14,6 +14,7 @@ public class HTTPConnection implements connection.httpModel {
     private final String USER_AGENT = "Mozilla/5.0";
     private int responseCode;
     private String jsonData;
+    private int errorCount = 0;
 
     @Override
     public String getJsonData() {
@@ -24,20 +25,15 @@ public class HTTPConnection implements connection.httpModel {
     public void makeHttpUrlConnection(String url) throws IOException {
         if(url != null){
             // Here is connection method.
-
             URL link = new URL(url);
-
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
-
             // add request header
             connection.setRequestProperty("User-Agent", USER_AGENT);
-
             responseCode = connection.getResponseCode();
-
             if (responseCode == 404) {
-                throw new FileNotFoundException("Could not find a file for that input. Please enter correct city.");
+                errorCount++;
+                throw new FileNotFoundException("Could not find a file for: " + url + ". Please enter correct city.");
             }
-
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
             String inputLine;
@@ -47,7 +43,6 @@ public class HTTPConnection implements connection.httpModel {
                 response.append(inputLine);
             }
             in.close();
-
             jsonData = response.toString();
         }
     }
@@ -69,5 +64,9 @@ public class HTTPConnection implements connection.httpModel {
 
     public int getResponseCode() {
         return responseCode;
+    }
+
+    public int getErrorCount() {
+        return errorCount;
     }
 }

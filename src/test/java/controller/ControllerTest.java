@@ -1,10 +1,15 @@
 package controller;
 
+import data.InputDataList;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.reset;
+import java.io.IOException;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ControllerTest {
@@ -25,8 +30,16 @@ public class ControllerTest {
     @Test
     public void askUserInputShouldDisplayWeatherResults() throws Exception {
         controller.askUserInput();
+    }
 
-//        verify(controller).displayWeatherResults(anyString());
+    @Ignore
+    public void initializeShouldAskUserInput() throws IOException {
+        doNothing().when(controller).askUserInput();
+
+        controller.initialize();
+
+        verify(controller).createInputFileReader(any(InputDataList.class));
+        verify(controller).askUserInput();
     }
 
 }

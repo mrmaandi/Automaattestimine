@@ -1,4 +1,4 @@
-package filereader;
+package operations;
 
 import data.InputDataList;
 import data.WeatherData;
@@ -36,6 +36,7 @@ public class OutputFileWriter {
     void writeFilesBufferedWriter(String outputDestination, Request request, Repository repository) {
         WeatherData currentWeather;
         BufferedWriter bufferedWriter;
+
         try {
             currentWeather = repository.getCurrentWeather(request);
 

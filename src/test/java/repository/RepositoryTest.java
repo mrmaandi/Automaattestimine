@@ -1,18 +1,35 @@
 package repository;
 
-import org.junit.Ignore;
+import connection.HTTPConnection;
+import data.WeatherData;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
 import request.Request;
 
-import static helpers.Constants.COUNTRY_CODE.EE;
-import static helpers.Constants.UNIT.metric;
+import static org.mockito.Mockito.verify;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class RepositoryTest {
+    @Mock
+    private HTTPConnection httpConnection;
+    @Mock
+    private Repository repository;
+    @Mock
+    private Request request;
 
-    @Ignore
-    public void repositoryGetCurrentWeatherShouldThrowJSONExceptionWhenRequestNull() throws Exception {
-        Repository repository = new Repository();
-        Request request = new Request("Tallinn", EE, metric);
-        repository.getCurrentWeather(request);
+    @Before
+    public void setUp(){
+        initMocks(this);
     }
 
+    @Test
+    public void getCurrentWeather() throws Exception {
+//        Request request = new Request("Tallinn", EE, metric);
+
+        WeatherData weatherData = repository.getCurrentWeather(request);
+
+        verify(request).fetchJsonCurrentWeatherString(repository.getConnection());
+
+    }
 }
